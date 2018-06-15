@@ -1,0 +1,153 @@
+﻿@using Tours_1._0.Models
+@model dynamic
+
+@{
+    ViewBag.Title = "Подробнее";
+    Hostel hostel = Model.Hostel;
+    List<ResponseHostel> responses = Model.Responses;
+}
+
+<div class="row">
+    <div class="col-md-6 col-sm-6">
+        <h2>Подробнее</h2>
+    </div>
+
+    <div class="col-md-6 col-sm-6">
+        <p style="float: right; margin: 20px 0 0px;">
+            @if (this.User.IsInRole("admin"))
+            {
+                @Html.ActionLink("Вернуться к отелям", "Index", null, new { @class = "btn btn-default" })
+            }
+            else
+            {
+                @Html.ActionLink("Вернуться к отелям", "IndexUser", null, new { @class = "btn btn-default" })
+            }
+        </p>
+    </div>
+</div>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => hostel.HostelName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => hostel.HostelName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => hostel.HostelMark)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => hostel.HostelMark)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => hostel.Website)
+        </dt>
+
+        <dd>
+            <a target="_blank" href="@hostel.Website">Открыть</a>
+        </dd>
+
+    </dl>
+</div>
+@if (this.User.IsInRole("admin"))
+{
+    <p>
+        @Html.ActionLink("Изменить", "Edit", new { id = hostel.HostelID }, new { @class = "btn btn-default" })
+    </p>
+}
+
+<div class="row">
+    <div class="col-md-6 col-sm-6">
+        <h3>Отзывы</h3>
+    </div>
+    @if (this.User.IsInRole("user"))
+    {
+        <div class="col-md-6 col-sm-6">
+            <p style="float: right; margin: 20px 0 0px;">
+                @Html.ActionLink("Написать отзыв", "Create", "ResponseHostels", new { id = hostel.HostelID }, new { @class = "btn btn-default" })
+            </p>
+        </div>
+    }
+</div>
+
+<h6></h6>
+
+@if (responses.Count == 0)
+{
+    <div class="alert alert-info">
+        <strong>Информация!</strong> Отзывов нет.
+    </div>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => responses.FirstOrDefault().ApplicationUser.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => responses.FirstOrDefault().ResponseName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => responses.FirstOrDefault().Mark)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => responses.FirstOrDefault().DateTime)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in responses)
+        {
+            <tr>
+                @if (item.UserId == Model.Id)
+                {
+                    <td>
+                        Вы
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ApplicationUser.FirstName)
+                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.ResponseName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mark)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTime)
+                </td>
+                @if (item.UserId == Model.Id)
+                {
+                    <td>
+                        @using (Html.BeginForm("Delete", "ResponseHostels", new { id = item.ResponseID }, FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-actions no-color">
+                                @Html.ActionLink("Изменить", "Edit", "ResponseHostels", new { id = item.ResponseID }, new { @class = "btn btn-default" })
+                                <input type="submit" value="Удалить" class="btn btn-default" />
+                            </div>
+                        }
+                    </td>
+                }
+                else
+                {
+                    <td></td>
+                }
+
+            </tr>
+        }
+
+    </table>
+}

@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Tours_1._0.Models.Order>
+
+@{
+    ViewBag.Title = "Список заказов";
+}
+
+<div class="row">
+    <div class="col-md-6 col-sm-6">
+        <h2>Список заказов</h2>
+    </div>
+</div>
+
+@if (Model.ToList().Count == 0)
+{
+    <div class="alert alert-info">
+        <strong>Информация!</strong> У вас нет заказов туров.
+    </div>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Tour.TourName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOrder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatusOrder.StatusOrderName)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tour.TourName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOrder)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StatusOrder.StatusOrderName)
+                </td>
+                <td>
+                    @Html.ActionLink("Подробнее", "Details", new { id = item.OrderID }) |
+                    @Html.ActionLink("Отменить", "Delete", new { id = item.OrderID })
+                </td>
+            </tr>
+        }
+
+    </table>
+}

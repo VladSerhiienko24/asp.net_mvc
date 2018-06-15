@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Tours_1._0.Models.Hostel>
+
+@{
+    ViewBag.Title = "Список отелей";
+}
+
+<div class="row">
+    <div class="col-md-6 col-sm-6">
+        <h2>Список отелей</h2>
+    </div>
+    @if (this.User.IsInRole("manager"))
+    {
+        <div class="col-md-6 col-sm-6">
+            <p style="float: right; margin: 20px 0 0px;">
+                @Html.ActionLink("Список отелей в PDF", "HostelsPdf", "Hostels", null, new { @class = "btn btn-default" })
+            </p>
+        </div>
+    }
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.HostelName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HostelMark)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Website)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HostelName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HostelMark)
+            </td>
+            <td>
+                <a target="_blank" href="@item.Website">Открыть</a>
+            </td>
+            <td>
+                @Html.ActionLink("Подробнее", "Details", new { id = item.HostelID }, new { @class = "btn btn-default"})
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Tours_1._0.Models.StatusOrder>
+
+@{
+    ViewBag.Title = "Статусы";
+}
+
+<div class="row">
+    <div class="col-md-6 col-sm-6">
+        <h2>Возможные статусы</h2>
+    </div>
+    <div class="col-md-6 col-sm-6">
+        <p style="float: right; margin: 20px 0 0px;">
+            @Html.ActionLink("Добавить новый статус", "Create", null, new { @class = "btn btn-primary" })
+        </p>
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.StatusOrderName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.StatusOrderName)
+        </td>
+        <td>
+            @Html.ActionLink("Редактировать", "Edit", new { id = item.StatusOrderID }) |
+            @Html.ActionLink("Удалить", "Delete", new { id = item.StatusOrderID })
+        </td>
+    </tr>
+}
+
+</table>

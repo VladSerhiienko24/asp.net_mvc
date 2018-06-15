@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Tours_1._0.Models.ResponseHostel>
+
+@{
+    ViewBag.Title = "Отзывы";
+}
+
+<h2>Отзывы про отели</h2>
+
+@if (Model.ToList().Count == 0)
+{
+    <div class="alert alert-info">
+        <strong>Информация!</strong> Еще никто не оставил отзыв.
+    </div>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Hostel.HostelName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ResponseName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mark)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateTime)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hostel.HostelName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ResponseName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mark)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTime)
+                </td>
+                <td>
+                    @using (Html.BeginForm("Delete", "ResponseHostels", new { id = item.ResponseID }, FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-actions no-color">
+                            <input type="submit" value="Удалить" class="btn btn-default" />
+                        </div>
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>
+}

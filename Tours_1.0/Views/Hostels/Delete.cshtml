@@ -1,0 +1,46 @@
+﻿@model Tours_1._0.Models.Hostel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h3>Вы уверены, что хотите удалить этот отель?</h3>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HostelName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HostelName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HostelMark)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HostelMark)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Website)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Website)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        @Html.ActionLink("Вернуться к отелям", "Index", null, new { @class = "btn btn-default" })
+        <input type="submit" value="Удалить" class="btn btn-default" />
+    </div>
+    }
+</div>

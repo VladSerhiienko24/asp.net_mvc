@@ -1,0 +1,31 @@
+﻿@model Tours_1._0.Models.StatusOrder
+
+@{
+    ViewBag.Title = "Удаление";
+}
+
+<h3>Вы уверены, что хотите удалить этот статус?</h3>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StatusOrderName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StatusOrderName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            @Html.ActionLink("Вернуться назад", "Index", null, new { @class = "btn btn-default" })
+            <input type="submit" value="Удалить" class="btn btn-default" />
+        </div>
+    }
+</div>

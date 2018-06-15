@@ -1,0 +1,100 @@
+﻿@model IEnumerable<Tours_1._0.Models.Tour>
+
+@{
+    ViewBag.Title = "Актуальные туры";
+}
+
+<div class="row">
+    <div class="col-md-6 col-sm-6">
+        <h2>Актуальные туры</h2>
+    </div>
+    <div class="col-md-6 col-sm-6">
+        <p style="float: right; margin: 20px 0 0px;">
+            @Html.ActionLink("Создать новый тур", "Create", null, new { @class = "btn btn-primary" })
+        </p>
+    </div>
+</div>
+
+@using (Html.BeginForm())
+{
+    <div class="input-group" style="display: flex;">
+        @Html.TextBox("SearchString", null, new { @class = "form-control", @placeholder = "Название тура..." })
+        <span class="input-group-btn">
+            <input type="submit" value="Поиск" class="btn btn-default" />
+        </span>
+    </div>
+}
+
+<h6></h6>
+
+<p>
+    @Html.ActionLink("Список туров в PDF", "ToursPdf", "Tours", null, new { @class = "btn btn-default" })
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TourName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeTour.TypeTourName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hostel.HostelName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateStart)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateEnd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StatusHot)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TourName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeTour.TypeTourName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hostel.HostelName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateStart)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateEnd)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.StatusHot)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @if (this.User.IsInRole("manager"))
+                {
+                    @Html.ActionLink("Подробнее", "Details", new { id = item.TourID })
+                }
+                else if (this.User.IsInRole("admin"))
+                {
+                    @Html.ActionLink("Изменить", "Edit", new { id = item.TourID }) <span>|</span>
+                    @Html.ActionLink("Подробнее", "Details", new { id = item.TourID }) <span>|</span>
+                    @Html.ActionLink("Удалить", "Delete", new { id = item.TourID })
+                }
+            </td>
+        </tr>
+    }
+
+</table>

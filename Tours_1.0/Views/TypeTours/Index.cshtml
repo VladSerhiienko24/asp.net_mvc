@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Tours_1._0.Models.TypeTour>
+
+@{
+    ViewBag.Title = "Категории";
+}
+
+<div class="row">
+    <div class="col-md-6 col-sm-6">
+        <h2>Категории туров</h2>
+    </div>
+    <div class="col-md-6 col-sm-6">
+        <p style="float: right; margin: 20px 0 0px;">
+            @Html.ActionLink("Добавить новую категорию", "Create", null, new { @class = "btn btn-primary" })
+        </p>
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeTourName)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeTourName)
+            </td>
+            <td>
+                @Html.ActionLink("Редактировать", "Edit", new { id = item.TypeTourID }) |
+                @Html.ActionLink("Удалить", "Delete", new { id = item.TypeTourID })
+            </td>
+        </tr>
+    }
+</table>
+

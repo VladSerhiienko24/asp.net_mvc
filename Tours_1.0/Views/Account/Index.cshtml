@@ -1,0 +1,40 @@
+﻿@using Tours_1._0.Models
+@model ApplicationUser
+
+@{
+    ViewBag.Title = "Пользователь";
+}
+
+<h2 style="margin-bottom: 25px">Профиль</h2>
+<h6></h6>
+
+<div class="row">
+    <div class="col-md-4 text-center">
+        <img src="~/vendor/img/user.png" />
+    </div>
+    <div class="col-md-8">
+    </div>
+</div>
+
+<dl class="dl-horizontal" style="font-size: 20px;">
+    @Html.AntiForgeryToken()
+    <dt>
+        
+        @Html.DisplayNameFor(m => Model.FirstName):
+    </dt>
+    <dd>
+        @Html.DisplayFor(m => Model.FirstName)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(m => Model.LastName):
+    </dt>
+    <dd>
+        @Html.DisplayFor(m => Model.LastName)
+    </dd>
+    <dt>
+        @Html.DisplayName("Почта: ")
+    </dt>
+    <dd>
+        @Html.DisplayFor(m => Model.Email)
+    </dd>
+</dl>

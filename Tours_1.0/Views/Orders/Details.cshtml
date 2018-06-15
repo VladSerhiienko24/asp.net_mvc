@@ -1,0 +1,131 @@
+﻿@using Tours_1._0.Models
+@model dynamic
+
+@{
+    ViewBag.Title = "Подробнее";
+    Order order = Model.Order;
+    Tour tour = Model.Tour;
+    Hostel hostel = Model.Hostel;
+    string status = Model.Status;
+}
+
+<h2>Подробнее</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => tour.TourName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => tour.TourName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => tour.TourSights)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => tour.TourSights)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => hostel.HostelName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => hostel.HostelName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => hostel.HostelMark)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => hostel.HostelMark)
+        </dd>
+        @*<dt>
+            @Html.DisplayNameFor(model => model.Ticket.OrderId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ticket.OrderId)
+        </dd>*@
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>*@
+        <dt>
+            @Html.DisplayNameFor(model => tour.DateStart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => tour.DateStart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => tour.DateEnd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => tour.DateEnd)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => order.DateOrder)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => order.DateOrder)
+        </dd>*@
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.QuantityMembers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuantityMembers)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuantityDays)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuantityDays)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => order.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => order.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Статус заказа")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => status)
+        </dd>
+    </dl>
+</div>
+<p>
+    @*@if (this.User.IsInRole("admin") || this.User.IsInRole("manager"))
+        {
+            @Html.ActionLink("Вернуться к заказам", "Index", null, new { @class = "btn btn-default" })
+            @Html.ActionLink("Изменить", "Edit", new { id = Model.OrderID }, new { @class = "btn btn-default" })
+        }
+        else if (this.User.IsInRole("user"))
+        {*@
+    @Html.ActionLink("Вернуться к заказам", "IndexUser", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Отменить заказ", "Delete", new { id = order.OrderID }, new { @class = "btn btn-default" })
+    @* } *@
+</p>

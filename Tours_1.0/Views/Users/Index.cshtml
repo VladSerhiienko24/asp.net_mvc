@@ -1,0 +1,65 @@
+﻿@using Tours_1._0.Models;
+@model IEnumerable<Tours_1._0.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "Пользователи";
+}
+<div class="row">
+    <div class="col-md-6 col-sm-6">
+        <h2>Пользователи</h2>
+    </div>
+    <div class="col-md-6 col-sm-6">
+        <p style="float: right; margin: 20px 0 0px;">
+            @Html.ActionLink("Список пользователей в PDF", "UsersPdf", "Users", null, new { @class = "btn btn-default" })
+        </p>
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(u => u.FirstOrDefault().FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(u => u.FirstOrDefault().LastName)
+        </th>
+        <th>
+            @Html.DisplayName("Почта")
+        </th>
+        <th>
+            @Html.DisplayName("Бан")
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            @Html.HiddenFor(modelItem => item.Id)
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.LockoutEnabled)
+            </td>
+            <td>
+                @if (item.LockoutEnabled)
+                {
+                    @Html.ActionLink("Разблокировать", "Block", new { id = item.Id }, new { @class = "btn btn-default" })
+                }
+                else
+                {
+                    @Html.ActionLink("Заблокировать", "Block", new { id = item.Id }, new { @class = "btn btn-default" })
+                }
+            </td>
+        </tr>
+    }
+
+</table>

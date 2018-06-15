@@ -1,0 +1,91 @@
+﻿@using Tours_1._0.Models
+@model dynamic
+
+@{
+    ViewBag.Title = "Удаление";
+    Tour tour = Model.tour;
+    Hostel hostel = Model.hostel;
+    string typeTour = Model.typeTour;
+}
+
+<h3>Вы уверены, что хотите удалить этот тур?</h3>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => tour.TourName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => tour.TourName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => tour.TypeTour.TypeTourName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => typeTour)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => tour.TourSights)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => tour.TourSights)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => hostel.HostelName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => hostel.HostelName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => tour.DateStart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => tour.DateStart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => tour.DateEnd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => tour.DateEnd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => tour.StatusHot)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => tour.StatusHot)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => tour.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => tour.Price)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            @Html.ActionLink("Вернуться к турам", "Index", null, new { @class = "btn btn-default" })
+            <input type="submit" value="Удалить" class="btn btn-default" />
+        </div>
+    }
+</div>

@@ -1,0 +1,46 @@
+﻿@model Tours_1._0.Models.ResponseHostel
+
+@{
+    ViewBag.Title = "Изменить";
+}
+
+<h2>Редактировать коментарий</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.HiddenFor(model => model.ResponseID)
+        @Html.HiddenFor(model => model.UserId)
+        @Html.HiddenFor(model => model.HostelID)
+        @Html.HiddenFor(model => model.DateTime)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ResponseName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ResponseName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ResponseName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Mark, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Mark, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Mark, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Сохранить" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Вернуться назад", "Details", "Hostels", new { id = Model.HostelID }, new { @class = "btn btn-default" })
+</div>
